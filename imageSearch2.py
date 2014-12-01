@@ -23,30 +23,35 @@ def getPic (search):
         #browser.set_debug_responses(True)
 
         browser.addheaders = [('User-agent','Mozilla/5.0 (X11; Ubuntu; Linux x86_64; rv:33.0) Gecko/20100101 Firefox/33.0')]
-        htmltext = browser.open('https://www.google.com/search?safe=off&hl=fr&site=imghp&tbm=isch&source=hp&biw=1920&bih=895&q='+search+'&oq='+search+'#q='+search+'&safe=off&hl=fr&tbm=isch&tbs=isz:l')
-        html =  htmltext.read()
-
-        query_args = {'safe':'on', 'hl':'fr', 'site':'imghp', 'tbm':'isch', 'source':'hp', 'biw':'1920', 'bih':'895','q':'poulet','oq':'poulet', 'tbs':'isz:l'}
-        encoded_args = urllib.urlencode(query_args)
-        url = 'https://www.google.com/search'
-        print urllib2.urlopen(url, encoded_args).read()
         
-        #print html
+        
+        
+        #htmltext = browser.open('https://www.google.com/search?safe=off&hl=fr&site=imghp&tbm=isch&source=hp&biw=1920&bih=895&q='+search+'&oq='+search+'#q='+search+'&safe=off&hl=fr&tbm=isch&tbs=isz:l')
+        #html =  htmltext.read()
+
+        
+        query_args = {'q':search, 'safe':'on', 'tbm':'isch'}
+        isz = {'tbs':'isz'}#urlencode doesn't work with the ':' part of the argument
+        
+        #unused command
+        #hl':'fr', 'site':'imghp', 'source':'hp', 'biw':'1920', 'bih':'895','q':'poulet','oq':'poulet'}
+        encoded_args = urllib.urlencode(query_args)
+        encoded_isz = urllib.urlencode(isz)
+        url = 'https://www.google.com/search?'+encoded_args+'&'+encoded_isz+':l'
+        htmltext = browser.open(url)
+        html = htmltext.read()
 
         img_urls = []
         formatted_images = []
         
         soup = BeautifulSoup(html)
+        print soup
         results = soup.findAll("a")
-        #print results
-        #results = soup.findAll("img")
-        #print results
 
         for r in results:
             try:
                 if "imgres?imgurl" in r['href']:
                     img_urls.append(r['href'])
-                    #print r['href']
             except:
                 a=0
         for im in img_urls:
