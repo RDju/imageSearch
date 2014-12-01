@@ -25,17 +25,15 @@ def getPic (search):
         # ---> REPLACE BY YOUR OWN USER AGENT ! <--- http://whatsmyuseragent.com/
         browser.addheaders = [('User-agent','Mozilla/5.0 (X11; Ubuntu; Linux x86_64; rv:33.0) Gecko/20100101 Firefox/33.0')]
         
-        
-        
-        #htmltext = browser.open('https://www.google.com/search?safe=off&hl=fr&site=imghp&tbm=isch&source=hp&biw=1920&bih=895&q='+search+'&oq='+search+'#q='+search+'&safe=off&hl=fr&tbm=isch&tbs=isz:l')
-        #html =  htmltext.read()
 
+        #htmltext = browser.open('https://www.google.com/search?safe=off&hl=fr&site=imghp&tbm=isch&source=hp&biw=1920&bih=895&q='+search+'&oq='+search+'#q='+search+'&safe=off&hl=fr&tbm=isch&tbs=isz:l')
         
         query_args = {'q':search, 'safe':'on', 'tbm':'isch'}
         isz = {'tbs':'isz'}#urlencode doesn't work with the ':' part of the argument
         
-        #unused command
+        #unused criterion
         #hl':'fr', 'site':'imghp', 'source':'hp', 'biw':'1920', 'bih':'895','q':'poulet','oq':'poulet'}
+  
         encoded_args = urllib.urlencode(query_args)
         encoded_isz = urllib.urlencode(isz)
         url = 'https://www.google.com/search?'+encoded_args+'&'+encoded_isz+':l'
