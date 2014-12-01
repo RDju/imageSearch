@@ -22,6 +22,7 @@ def getPic (search):
         #browser.set_debug_redirects(True)
         #browser.set_debug_responses(True)
 
+        # ---> REPLACE BY YOUR OWN USER AGENT ! <--- http://whatsmyuseragent.com/
         browser.addheaders = [('User-agent','Mozilla/5.0 (X11; Ubuntu; Linux x86_64; rv:33.0) Gecko/20100101 Firefox/33.0')]
         
         
